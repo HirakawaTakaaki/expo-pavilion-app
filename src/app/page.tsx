@@ -1,103 +1,45 @@
-import Image from "next/image";
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+// 仮のパビリオンデータ（後でSupabaseと連携予定）
+const pavilions = [
+  {
+    id: 1,
+    name: '日本館',
+    image: '/pavilion-img/Nihonkan.png', // public フォルダに画像を置く
+    description: '日本館は、大阪・関西万博のテーマである「いのち輝く未来社会のデザイン」を開催国としてプレゼンテーションする拠点であり、当該テーマの具現化や、日本の取り組みの発信等を行います。「いのちと、いのちの、あいだに」をテーマに、万博会場内の生ゴミを利用したバイオガス発電や、世界に貢献しうる日本の先端的な技術等を活用し、一つの循環を創出し、持続可能な社会に向けた来場者の行動変容を促します。'
+  },
+  {
+    id: 2,
+    name: 'アメリカパビリオン',
+    image: '/pavilion-img/america.jpg',
+    description: '共に創出できることを想像しよう 米国パビリオンは米国の革新性と独創性を視覚的に表現。木造の外観が特徴的な三角形の建物2棟と並行に、キューブが浮かぶように配置され、ステージも設けられています。パビリオンでは、テクノロジー、宇宙開発、教育、文化、起業家精神における米国のリーダーシップを紹介し、5つの没入型展示エリアが新たな視点から可能性について考えるよう来場者を迎えます。美しきアメリカ'
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main className="p-4">
+      <h1 className="text-2xl font-bold mb-4 text-center">パビリオン一覧</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {pavilions.map((pavilion) => (
+          <Link href={`/pavilion/${pavilion.id}`} key={pavilion.id}>
+            <div className="border rounded-xl p-4 shadow hover:shadow-lg transition bg-white">
+              <Image
+                src={pavilion.image}
+                alt={pavilion.name}
+                width={500}
+                height={300}
+                className="rounded-xl object-cover"
+              />
+              <h2 className="text-xl font-semibold mt-2">{pavilion.name}</h2>
+              <p className="text-gray-600 text-sm mt-1">{pavilion.description}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </main>
   );
 }
