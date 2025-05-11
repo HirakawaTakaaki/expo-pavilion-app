@@ -1,7 +1,7 @@
 // src/app/page.tsx
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState,} from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
@@ -12,7 +12,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose,
-  DialogDescription,
 } from '@/components/ui/dialog';
 
 const supabase = createClient(
@@ -30,7 +29,6 @@ interface Pavilion {
 export default function Home() {
   const [pavilions, setPavilions] = useState<Pavilion[]>([]);
   const [viewType, setViewType] = useState<'list' | 'block'>('list');
-  const [sortType, setSortType] = useState<'default' | 'rating'>('default');
   const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [name, setName] = useState('');
