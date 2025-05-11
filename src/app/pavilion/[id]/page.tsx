@@ -24,6 +24,8 @@ export default function PavilionDetail() {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [again, setAgain] = useState<'yes' | 'no' | null>(null);
+
 
   // パビリオンの情報を取得
   const fetchPavilionInfo = async () => {
@@ -64,12 +66,14 @@ export default function PavilionDetail() {
         pavilion_id: pavilionId,
         name: name || '匿名',
         comment,
+        again: again === 'yes' ? true : false,
       },
     ]);
 
     if (!error) {
       setComment('');
       setName('');
+      setAgain(null);
       fetchReviews(); // 再取得
     } else {
       alert('投稿に失敗しました');
@@ -101,6 +105,30 @@ export default function PavilionDetail() {
           required
           className="w-full border p-2 rounded"
         />
+        <p className="mt-2 font-semibold">また行きたいと思いましたか？</p>
+        <div className="flex gap-4">
+            <label className="flex items-center gap-1">
+                <input
+                type="radio"
+                name="again"
+                value="yes"
+                checked={again === 'yes'}
+                onChange={() => setAgain('yes')}
+                />
+                はい
+            </label>
+            <label className="flex items-center gap-1">
+                <input
+                type="radio"
+                name="again"
+                value="no"
+                checked={again === 'no'}
+                onChange={() => setAgain('no')}
+                />
+                いいえ
+            </label>
+        </div>
+
         <button
           type="submit"
           disabled={isSubmitting || !comment}
