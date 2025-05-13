@@ -6,45 +6,45 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogClose,
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogClose,
 } from '@/components/ui/dialog';
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
 interface Pavilion {
-  id: number;
-  name: string;
-  description: string;
-  image_url: string;
+    id: number;
+    name: string;
+    description: string;
+    image_url: string;
 }
 
 interface Review {
-  id: number;
-  pavilion_id: number;
-  name: string;
-  comment: string;
-  again: boolean;
-  created_at: string;
+    id: number;
+    pavilion_id: number;
+    name: string;
+    comment: string;
+    again: boolean;
+    created_at: string;
 }
 
 export default function PavilionDetailPage() {
-  const { id } = useParams();
-  const router = useRouter();
-  const [pavilion, setPavilion] = useState<Pavilion | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
-  const [again, setAgain] = useState<'yes' | 'no' | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+    const { id } = useParams();
+    const router = useRouter();
+    const [pavilion, setPavilion] = useState<Pavilion | null>(null);
+    const [reviews, setReviews] = useState<Review[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [reviewDialogOpen, setReviewDialogOpen] = useState(false);
+    const [name, setName] = useState('');
+    const [comment, setComment] = useState('');
+    const [again, setAgain] = useState<'yes' | 'no' | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
