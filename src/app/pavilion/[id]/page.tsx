@@ -145,7 +145,6 @@ export default function PavilionDetailPage() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>口コミを投稿</DialogTitle>
-            <DialogClose className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">×</DialogClose>
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-2">
             <input

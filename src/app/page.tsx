@@ -1,7 +1,7 @@
 // src/app/page.tsx
 'use client';
 
-import { useEffect, useState,} from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
@@ -116,7 +116,7 @@ export default function Home() {
           {pavilions.map((p) => (
             <div
               key={p.id}
-              className="relative border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition"
+              className="relative flex flex-col border border-slate-200 dark:border-slate-700 rounded-2xl p-4 bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition"
             >
               <div onClick={() => router.push(`/pavilion/${p.id}`)} className="cursor-pointer">
                 <Image
@@ -124,10 +124,12 @@ export default function Home() {
                   alt={p.name}
                   width={500}
                   height={300}
-                  className="rounded-xl object-cover"
+                  className="rounded-xl object-cover w-full h-40"
                 />
                 <h2 className="text-lg font-bold mt-3 text-blue-800 dark:text-blue-300">{p.name}</h2>
-                <p className="text-slate-600 dark:text-slate-300 text-sm mt-1 line-clamp-2">{p.description}</p>
+                <p className="text-slate-600 dark:text-slate-300 text-sm mt-1 line-clamp-3 mb-6">
+                  {p.description}
+                </p>
               </div>
               <button
                 className="absolute bottom-4 right-4 text-sm text-blue-600 hover:underline"
@@ -147,7 +149,6 @@ export default function Home() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>口コミを投稿</DialogTitle>
-            <DialogClose className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">×</DialogClose>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-2">
