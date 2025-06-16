@@ -10,8 +10,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
-  DialogClose,
+  DialogTitle
 } from '@/components/ui/dialog';
 
 const supabase = createClient(
